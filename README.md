@@ -4,7 +4,7 @@ Another Rust Operating System - a simple Rust OS to learn how to create one.
 ## Requirements
 
 *	xargo (```cargo install xargo```)
-*	Rust nightly (with rustup: ```rustup override set nightly```)
+*	Rust nightly (with rustup: ```rustup override set nightly-2018-03-06```)
 
 ## How to build / run
 
