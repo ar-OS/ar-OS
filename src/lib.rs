@@ -6,6 +6,7 @@ extern crate vga;
 
 use vga::buffer::print_message;
 
+#[no_mangle]
 #[lang = "eh_personality"]
 extern "C" fn eh_personality() {}
 
