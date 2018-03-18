@@ -1,0 +1,3 @@
+[submodule "src/vga"]
+	path = src/vga
+	url = https://github.com/ar-OS/vga
