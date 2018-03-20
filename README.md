@@ -15,6 +15,6 @@ Another Rust Operating System - a simple Rust OS to learn how to create one.
 
 #### Current state
 
-![state 1][state_1]
+![state 2][state_2]
 
-[state_1]: img/current_state_1.jpg
+[state_2]: img/current_state_2.png
