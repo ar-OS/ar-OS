@@ -1,9 +1,11 @@
 #![feature(lang_items)]
+#![feature(panic_implementation)]
 #![no_std]
 
 extern crate rlibc;
 extern crate vga;
 
+use core::panic::PanicInfo;
 use vga::buffer::print_message;
 
 #[no_mangle]
@@ -11,8 +13,8 @@ use vga::buffer::print_message;
 extern "C" fn eh_personality() {}
 
 #[no_mangle]
-#[lang = "panic_fmt"]
-extern "C" fn rust_begin_panic() -> ! {
+#[panic_implementation]
+extern "C" fn rust_begin_panic(info: &PanicInfo) -> ! {
     loop {}
 }
 
@@ -45,3 +47,4 @@ pub extern "C" fn kernel_main() -> ! {
     print_message();
     loop {}
 }
+
