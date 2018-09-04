@@ -3,10 +3,11 @@
 #![no_std]
 
 extern crate rlibc;
+#[macro_use]
 extern crate vga;
 
 use core::panic::PanicInfo;
-use vga::buffer::print_message;
+use vga::buffer::BUF_WRITER;
 
 #[no_mangle]
 #[lang = "eh_personality"]
@@ -44,7 +45,10 @@ pub extern "C" fn __muloti4() {}
 #[no_mangle]
 pub extern "C" fn kernel_main() -> ! {
     // Test
-    print_message();
+    use core::fmt::Write;
+
+    echo!(BUF_WRITER.lock(), "Hello world, and welcome to ar-OS!");
+
     loop {}
 }
 
