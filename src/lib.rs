@@ -1,5 +1,5 @@
 #![feature(lang_items)]
-#![feature(panic_implementation)]
+#![feature(panic_handler)]
 #![no_std]
 
 extern crate rlibc;
@@ -14,7 +14,7 @@ use vga::buffer::BUF_WRITER;
 extern "C" fn eh_personality() {}
 
 #[no_mangle]
-#[panic_implementation]
+#[panic_handler]
 extern "C" fn rust_begin_panic(info: &PanicInfo) -> ! {
     loop {}
 }
