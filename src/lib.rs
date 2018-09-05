@@ -16,6 +16,8 @@ extern "C" fn eh_personality() {}
 #[no_mangle]
 #[panic_handler]
 extern "C" fn rust_begin_panic(info: &PanicInfo) -> ! {
+    use core::fmt::Write;
+    echo!(BUF_WRITER.lock(), "{}", info);
     loop {}
 }
 
