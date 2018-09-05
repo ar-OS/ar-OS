@@ -48,9 +48,7 @@ pub extern "C" fn __muloti4() {}
 pub extern "C" fn kernel_main() -> ! {
     // Test
     use core::fmt::Write;
-
     echo!(BUF_WRITER.lock(), "Hello world, and welcome to ar-OS!");
-
     loop {}
 }
 
