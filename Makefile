@@ -2,7 +2,11 @@ ASM=src/asm
 LIBCORE=libcore
 TARGET=target
 
-LD="x86_64-pc-elf-ld"
+ifeq ($(OS),Linux)
+	LD="ld"
+else
+	LD="x86_64-pc-elf-ld"
+endif
 MKRESCUE=grub-mkrescue
 NASM=nasm
 QEMU=qemu-system-x86_64
@@ -33,7 +37,7 @@ BUILD_LIBCORE=$(TARGET)/$(LIBCORE)
 BUILD_LIBCORE_STATIC=$(TARGET)/$(LIBCORE)/$(TARGET)/$(AROS_CFIG)/libcore.rlib
 BUILD_MULTIBOOT=$(TARGET)/$(MULTIBOOT_O)
 
-default: build 
+default: build
 
 build: $(BUILD_ISO)
 
@@ -42,7 +46,7 @@ run: $(BUILD_ISO)
 
 $(BUILD_MULTIBOOT): $(SRC_MULTIBOOT)
 	mkdir -p $(TARGET)/
-	$(NASM) -f elf64 $< -o $@ 
+	$(NASM) -f elf64 $< -o $@
 
 $(BUILD_BOOT): $(SRC_BOOT)
 	mkdir -p $(TARGET)/
@@ -57,7 +61,7 @@ $(BUILD_ISO): $(BUILD_KERNEL) $(SRC_GRUB)
 	cp $< $(TARGET)/isofiles/boot/
 	$(MKRESCUE) -o $@ $(TARGET)/isofiles
 
-xargo: 
+xargo:
 	xargo build --release --target $(AROS_CFIG)
 
 .PHONY: clean
