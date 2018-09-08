@@ -6,6 +6,7 @@ extern crate rlibc;
 #[macro_use]
 extern crate vga;
 
+use core::fmt::Write;
 use core::panic::PanicInfo;
 use vga::buffer::BUF_WRITER;
 
@@ -16,7 +17,6 @@ extern "C" fn eh_personality() {}
 #[no_mangle]
 #[panic_handler]
 extern "C" fn rust_begin_panic(info: &PanicInfo) -> ! {
-    use core::fmt::Write;
     echo!(BUF_WRITER.lock(), "{}", info);
     loop {}
 }
@@ -47,7 +47,6 @@ pub extern "C" fn __muloti4() {}
 #[no_mangle]
 pub extern "C" fn kernel_main() -> ! {
     // Test
-    use core::fmt::Write;
     echo!(BUF_WRITER.lock(), "Hello world, and welcome to ar-OS!");
     loop {}
 }
