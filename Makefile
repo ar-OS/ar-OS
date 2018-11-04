@@ -3,9 +3,9 @@ LIBCORE=libcore
 TARGET=target
 
 ifeq ($(OS),Linux)
-	LD="ld"
+	LD=ld
 else
-	LD="x86_64-pc-elf-ld"
+	LD=x86_64-pc-elf-ld
 endif
 MKRESCUE=grub-mkrescue
 NASM=nasm
