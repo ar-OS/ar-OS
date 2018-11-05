@@ -1,5 +1,4 @@
 #![feature(lang_items)]
-#![feature(panic_handler)]
 #![no_std]
 
 extern crate rlibc;
