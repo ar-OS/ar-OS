@@ -3,4 +3,4 @@
 	url = https://github.com/ar-OS/vga
 [submodule "src/interrupts"]
 	path = src/interrupts
-	url = https://github.com/ar-OS/interrupts
+  url = https://github.com/ar-OS/interrupts
