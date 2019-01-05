@@ -14,6 +14,12 @@ Another Rust Operating System - a simple Rust OS to learn how to create one.
 *   ```make```
 *   ```RUST_TARGET_PATH=`pwd` make run```
 
+## Troubleshootings
+
+* `error: Error loading target specification: Could not find specification for
+target "x86_64-unknown-aros-gnu"`  
+  Please to compile the OS using ```RUST_TARGET_PATH=`pwd` make```
+
 ## Screenshots
 
 #### Current state
