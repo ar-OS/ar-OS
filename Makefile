@@ -11,8 +11,6 @@ MKRESCUE=grub-mkrescue
 NASM=nasm
 QEMU=qemu-system-x86_64
 
-LIBCORE_URL=http://github.com/intermezzos/libcore
-
 ISO=arOS.iso
 KERNEL=kernel.bin
 
@@ -53,6 +51,7 @@ $(BUILD_BOOT): $(SRC_BOOT)
 	$(NASM) -f elf64 $< -o $@
 
 $(BUILD_KERNEL): $(BUILD_MULTIBOOT) $(BUILD_BOOT) $(SRC_LINKER) xargo
+	@echo "Building kernel using $(LD)"
 	$(LD) -n -o $@ -T $(SRC_LINKER) $(BUILD_MULTIBOOT) $(BUILD_BOOT) $(BUILD_LIBAROS)
 
 $(BUILD_ISO): $(BUILD_KERNEL) $(SRC_GRUB)
