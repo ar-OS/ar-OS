@@ -1,8 +1,8 @@
 ASM=src/asm
 LIBCORE=libcore
 TARGET=target
-
-ifeq ($(OS),Linux)
+UNAME=$(shell uname -s)
+ifeq ($(UNAME),Linux)
 	LD=ld
 else
 	LD=x86_64-pc-elf-ld
