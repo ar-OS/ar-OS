@@ -1,6 +1,6 @@
 [submodule "src/vga"]
-	path = src/vga
-	url = https://github.com/ar-OS/vga
+  path = src/vga
+  url = https://github.com/ar-OS/vga
 [submodule "src/interrupts"]
-	path = src/interrupts
+  path = src/interrupts
   url = https://github.com/ar-OS/interrupts
