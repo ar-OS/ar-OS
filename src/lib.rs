@@ -47,6 +47,7 @@ pub extern "C" fn __muloti4() {}
 
 #[no_mangle]
 pub extern "C" fn kernel_main() -> ! {
+    clear_screen!(BUF_WRITER.lock());
     // Initialize the main functions of the OS
     echo!(BUF_WRITER.lock(), "Initializing the Interruption table...");
     init_idt();
