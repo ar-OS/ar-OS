@@ -1,8 +1,6 @@
 # arOS
 Another Rust Operating System - a simple Rust OS to learn how to create one.
 
-arOS builds are only tested on GNU/Linux.
-
 ## Tools
 
 In order to build ar-OS, you will need (at least):
@@ -20,6 +18,8 @@ create a PR.
 *	Rust nightly (using rustup: `rustup override set nightly`)
 * rust-src (`rustup component add rust-src`)
 
+For macOS: `nasm`, `gcc`, `g++`, `grub2`, `objconf`, `qemu`, `xorriso` ...
+
 ## How to build / run
 
 *   `make`
@@ -28,7 +28,7 @@ create a PR.
 ## Troubleshootings
 
 * `error: Error loading target specification: Could not find specification for
-target "x86_64-unknown-aros-gnu"`  
+target "x86_64-unknown-aros-gnu"`
   Please to compile the OS using `RUST_TARGET_PATH=$(pwd) make`
 
 ## Screenshots
