@@ -35,6 +35,6 @@ target "x86_64-unknown-aros-gnu"`
 
 #### Current state
 
-![state 2][state_2]
+![state 3][state_3]
 
-[state_2]: img/current_state_2.png
+[state_3]: img/current_state_3.png
