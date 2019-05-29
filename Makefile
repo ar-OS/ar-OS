@@ -40,7 +40,7 @@ default: build
 build: $(BUILD_ISO)
 
 run: $(BUILD_ISO)
-	$(QEMU) -cdrom $(BUILD_ISO)
+	$(QEMU) -drive format=raw,file=$(BUILD_ISO)
 
 $(BUILD_MULTIBOOT): $(SRC_MULTIBOOT)
 	mkdir -p $(TARGET)/
