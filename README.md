@@ -6,16 +6,18 @@ Another Rust Operating System - a simple Rust OS to learn how to create one.
 In order to build ar-OS, you will need (at least):
 * autoconf,
 * cmake,
+* nasm,
 * qemu,
-* grub.
+* grub2,
+* xorriso (>= 1.5.0).
 
 If another tools are needed (depending on your distro or your OS), please to
 create a PR.
 
 ## Requirements
 
-*	xargo (`cargo install xargo`)
-*	Rust nightly (using rustup: `rustup override set nightly`)
+* xargo (`cargo install xargo`)
+* Rust nightly (using rustup: `rustup override set nightly`)
 * rust-src (`rustup component add rust-src`)
 
 For macOS: `nasm`, `gcc`, `g++`, `grub2`, `objconf`, `qemu`, `xorriso` ...
@@ -26,6 +28,9 @@ For macOS: `nasm`, `gcc`, `g++`, `grub2`, `objconf`, `qemu`, `xorriso` ...
 *   `RUST_TARGET_PATH=`pwd` make run`
 
 ## Troubleshootings
+
+* `error: No bootable device`
+  Make sure that grub2 is installed, not grub-legacy
 
 * `error: Error loading target specification: Could not find specification for
 target "x86_64-unknown-aros-gnu"`
