@@ -24,8 +24,17 @@ For macOS: `nasm`, `gcc`, `g++`, `grub2`, `objconf`, `qemu`, `xorriso` ...
 
 ## How to build / run
 
-*   `make`
-*   `RUST_TARGET_PATH=`pwd` make run`
+```bash
+# Clone the main repository as core
+git clone https://github.com/ar-OS/ar-OS core
+cd core
+# Update the git submodules
+git submodule init && git submodule update
+# Build the project
+make
+# Run the project
+RUST_TARGET_PATH=`pwd` make run
+```
 
 ## Troubleshootings
 
