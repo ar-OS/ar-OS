@@ -10,6 +10,7 @@ use core::fmt::Write;
 use core::panic::PanicInfo;
 use vga::buffer::BUF_WRITER;
 use interrupts::{init_idt, PICS};
+use interrupts::utils::{wait_for_interrupt};
 
 #[no_mangle]
 #[lang = "eh_personality"]
@@ -19,7 +20,7 @@ extern "C" fn eh_personality() {}
 #[panic_handler]
 extern "C" fn rust_begin_panic(info: &PanicInfo) -> ! {
     echo!(BUF_WRITER.lock(), "{}", info);
-    loop {}
+    wait_for_interrupt()
 }
 
 #[no_mangle]
@@ -54,7 +55,6 @@ pub extern "C" fn kernel_main() -> ! {
     unsafe { PICS.lock().init() };
     echo!(BUF_WRITER.lock(), "> Initialized!\n");
     echo!(BUF_WRITER.lock(), "Hello world, and welcome to ar-OS!");
-    
-    loop {}
+    wait_for_interrupt()
 }
 
