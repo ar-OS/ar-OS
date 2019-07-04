@@ -46,15 +46,21 @@ pub extern "C" fn __umodti3() {}
 #[no_mangle]
 pub extern "C" fn __muloti4() {}
 
+fn init_interrupts() {
+    // Initialize the interrupts table
+    init_idt();
+    unsafe { PICS.lock().init() };
+    // Initialize the external interrupts
+    x86_64::instructions::interrupts::enable();
+}
+
 #[no_mangle]
 pub extern "C" fn kernel_main() -> ! {
     clear_screen!(BUF_WRITER.lock());
     // Initialize the main functions of the OS
     echo!(BUF_WRITER.lock(), "Initializing the Interruption table...");
-    init_idt();
-    unsafe { PICS.lock().init() };
+    init_interrupts();
     echo!(BUF_WRITER.lock(), "> Initialized!\n");
     echo!(BUF_WRITER.lock(), "Hello world, and welcome to ar-OS!");
     wait_for_interrupt()
 }
-
