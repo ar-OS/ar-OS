@@ -8,9 +8,9 @@ extern crate interrupts;
 
 use core::fmt::Write;
 use core::panic::PanicInfo;
-use vga::buffer::BUF_WRITER;
+use interrupts::utils::wait_for_interrupt;
 use interrupts::{init_idt, PICS};
-use interrupts::utils::{wait_for_interrupt};
+use vga::buffer::BUF_WRITER;
 
 #[no_mangle]
 #[lang = "eh_personality"]
