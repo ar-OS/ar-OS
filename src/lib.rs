@@ -6,11 +6,9 @@ extern crate rlibc;
 extern crate vga;
 extern crate interrupts;
 
-use core::fmt::Write;
 use core::panic::PanicInfo;
 use interrupts::utils::wait_for_interrupt;
 use interrupts::{init_idt, PICS};
-use vga::buffer::BUF_WRITER;
 
 #[no_mangle]
 #[lang = "eh_personality"]
@@ -19,7 +17,7 @@ extern "C" fn eh_personality() {}
 #[no_mangle]
 #[panic_handler]
 extern "C" fn rust_begin_panic(info: &PanicInfo) -> ! {
-    echo!(BUF_WRITER.lock(), "{}", info);
+    echo!("{}", info);
     wait_for_interrupt()
 }
 
@@ -56,7 +54,7 @@ fn init_interrupts() {
 
 #[no_mangle]
 pub extern "C" fn kernel_main() -> ! {
-    clear_screen!(BUF_WRITER.lock());
+    clear_screen!();
     // Initialize the main functions of the OS
     echo!(BUF_WRITER.lock(), "Initializing the Interruption table...");
     init_interrupts();
