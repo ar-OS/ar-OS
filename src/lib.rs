@@ -56,9 +56,9 @@ fn init_interrupts() {
 pub extern "C" fn kernel_main() -> ! {
     clear_screen!();
     // Initialize the main functions of the OS
-    echo!(BUF_WRITER.lock(), "Initializing the Interruption table...");
+    echo!("Initializing the Interruption table...");
     init_interrupts();
-    echo!(BUF_WRITER.lock(), "> Initialized!\n");
-    echo!(BUF_WRITER.lock(), "Hello world, and welcome to ar-OS!");
+    echo!("> Initialized!\n");
+    clear_screen!();
     wait_for_interrupt()
 }
