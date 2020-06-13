@@ -104,4 +104,6 @@ echo ""
 
 brew install nasm xorriso qemu
 
-echo "Done, enjoy!"
+echo "Done"
+echo "To use all your new GNU tools, you can add this in your .profile file: echo \"export PATH=$PATH:$HOME/opt/bin\" >> .profile`"
+echo "Enjoy!"
