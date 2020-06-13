@@ -33,14 +33,14 @@ echo "Installing \`binutils\`"
 echo ""
 cd $HOME/src
 
-if [ ! -d "binutils-2.25" ]; then
-  curl -O http://ftp.gnu.org/gnu/binutils/binutils-2.25.tar.gz
-  tar xfz binutils-2.25.tar.gz
+if [ ! -d "binutils-2.34" ]; then
+  curl -O http://ftp.gnu.org/gnu/binutils/binutils-2.34.tar.gz
+  tar xfz binutils-2.34.tar.gz
 
-  rm binutils-2.25.tar.gz
+  rm binutils-2.34.tar.gz
   mkdir -p build-binutils
   cd build-binutils
-  ../binutils-2.25/configure --target=$TARGET --prefix="$PREFIX" --with-sysroot --disable-nls --disable-werror
+  ../binutils-2.34/configure --target=$TARGET --prefix="$PREFIX" --with-sysroot --disable-nls --disable-werror
   make
   make install
 fi
