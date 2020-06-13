@@ -45,6 +45,9 @@ RUST_TARGET_PATH=`pwd` make run
 target "x86_64-unknown-aros-gnu"`
   Please to compile the OS using `RUST_TARGET_PATH=$(pwd) make`
 
+* `error: possibly undefined macro: AC_CHECK_HEADERS`  
+  Please to install `pkg-config` (for macOS: `brew install pkg-config`)
+
 ## Screenshots
 
 #### Current state
