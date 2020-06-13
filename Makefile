@@ -5,7 +5,7 @@ UNAME=$(shell uname -s)
 ifeq ($(UNAME),Linux)
 	LD=ld
 else
-	LD=x86_64-pc-elf-ld
+	LD=x86_64-elf-ld
 endif
 MKRESCUE=grub-mkrescue
 NASM=nasm

@@ -26,7 +26,7 @@ export PATH="$PREFIX/bin:$PATH"
 mkdir -p $HOME/src
 mkdir -p $PREFIX
 
-brew install gmp mpfr libmpc autoconf automake
+brew install gmp mpfr libmpc autoconf automake pkg-config
 
 echo ""
 echo "Installing \`binutils\`"
@@ -50,13 +50,13 @@ echo "Installing \`gcc\`"
 echo ""
 cd $HOME/src
 
-if [ ! -d "gcc-7.3.0" ]; then
-  curl -L http://ftpmirror.gnu.org/gcc/gcc-7.3.0/gcc-7.3.0.tar.gz > gcc-7.3.0.tar.gz
-  tar xvzf gcc-7.3.0.tar.gz
-  rm gcc-7.3.0.tar.gz
+if [ ! -d "gcc-10.1.0" ]; then
+  curl -L ftp://ftp.lip6.fr/pub/gcc/releases/gcc-10.1.0/gcc-10.1.0.tar.gz > gcc-10.1.0.tar.gz
+  tar xvzf gcc-10.1.0.tar.gz
+  rm gcc-10.1.0.tar.gz
   mkdir -p build-gcc
   cd build-gcc
-  ../gcc-7.3.0/configure --target=$TARGET --prefix="$PREFIX" --disable-nls --enable-languages=c,c++ --without-headers --with-gmp=/usr/local/Cellar/gmp/6.1.0 --with-mpfr=/usr/local/Cellar/mpfr/3.1.3 --with-mpc=/usr/local/Cellar/libmpc/1.0.3
+  ../gcc-10.1.0/configure --target=$TARGET --prefix="$PREFIX" --disable-nls --enable-languages=c,c++ --without-headers --with-gmp=/usr/local/Cellar/gmp/6.1.0 --with-mpfr=/usr/local/Cellar/mpfr/3.1.3 --with-mpc=/usr/local/Cellar/libmpc/1.0.3
   make all-gcc
   make all-target-libgcc
   make install-gcc
@@ -70,7 +70,7 @@ cd $HOME/src
 
 
 if [ ! -d "objconv" ]; then
-  curl -O http://www.agner.org/optimize/objconv.zip
+  curl -L https://www.agner.org/optimize/objconv.zip > objconv.zip
   mkdir -p build-objconv
   unzip objconv.zip -d build-objconv
 
