@@ -1,6 +1,14 @@
 #!/bin/sh
 set -e
 
+create_if_dir_not_exists() {
+  dir_path=$1
+  if [ ! -d $dir_path ]; then
+    echo "Creating $dir_path..."
+    mkdir -p $dir_path
+  fi
+}
+
 CONTINUE=false
 
 echo ""
@@ -19,19 +27,24 @@ fi
 
 command -v brew >/dev/null 2>&1 || { echo >&2 "It seems you do not have \`brew\` installed. Head on over to http://brew.sh/ to install it."; exit 1; }
 
-export PREFIX="$HOME/opt/"
+export INIT_PATH="$HOME/Devel/build_binaries/"
+export PREFIX="$INIT_PATH/opt/"
+export BIN_PATH="$INIT_PATH/bin/"
+export SRC_PATH="$INIT_PATH/src/"
 export TARGET=x86_64-pc-elf
 export PATH="$PREFIX/bin:$PATH"
 
-mkdir -p $HOME/src
-mkdir -p $PREFIX
+create_if_dir_not_exists $INIT_PATH
+create_if_dir_not_exists $BIN_PATH
+create_if_dir_not_exists $SRC_PATH
+create_if_dir_not_exists $PREFIX
 
 brew install gmp mpfr libmpc autoconf automake pkg-config
 
 echo ""
 echo "Installing \`binutils\`"
 echo ""
-cd $HOME/src
+cd $SRC_PATH
 
 if [ ! -d "binutils-2.34" ]; then
   curl -O http://ftp.gnu.org/gnu/binutils/binutils-2.34.tar.gz
@@ -48,15 +61,15 @@ fi
 echo ""
 echo "Installing \`gcc\`"
 echo ""
-cd $HOME/src
+cd $SRC_PATH
 
 if [ ! -d "gcc-10.1.0" ]; then
-  curl -L ftp://ftp.lip6.fr/pub/gcc/releases/gcc-10.1.0/gcc-10.1.0.tar.gz > gcc-10.1.0.tar.gz
-  tar xvzf gcc-10.1.0.tar.gz
-  rm gcc-10.1.0.tar.gz
+  curl -L ftp://ftp.lip6.fr/pub/gcc/releases/gcc-10.2.0/gcc-10.2.0.tar.gz > gcc-10.2.0.tar.gz
+  tar xvzf gcc-10.2.0.tar.gz
+  rm gcc-10.2.0.tar.gz
   mkdir -p build-gcc
   cd build-gcc
-  ../gcc-10.1.0/configure --target=$TARGET --prefix="$PREFIX" --disable-nls --enable-languages=c,c++ --without-headers --with-gmp=/usr/local/Cellar/gmp/6.1.0 --with-mpfr=/usr/local/Cellar/mpfr/3.1.3 --with-mpc=/usr/local/Cellar/libmpc/1.0.3
+  ../gcc-10.2.0/configure --target=$TARGET --prefix="$PREFIX" --disable-nls --enable-languages=c,c++ --without-headers --with-gmp=/usr/local/Cellar/gmp/6.1.0 --with-mpfr=/usr/local/Cellar/mpfr/3.1.3 --with-mpc=/usr/local/Cellar/libmpc/1.0.3
   make all-gcc
   make all-target-libgcc
   make install-gcc
@@ -66,7 +79,7 @@ fi
 echo ""
 echo "Installing \`objconv\`"
 echo ""
-cd $HOME/src
+cd $SRC_PATH
 
 
 if [ ! -d "objconv" ]; then
@@ -77,13 +90,13 @@ if [ ! -d "objconv" ]; then
   cd build-objconv
   unzip source.zip -d src
   g++ -o objconv -O2 src/*.cpp --prefix="$PREFIX"
-  cp objconv $PREFIX/bin
+  cp objconv $BIN_PATH
 fi
 
 echo ""
 echo "Installing \`grub\`"
 echo ""
-cd $HOME/src
+cd $SRC_PATH
 
 if [ ! -d "grub" ]; then
   git clone --depth 1 git@github.com:ar-OS/grub
@@ -105,5 +118,5 @@ echo ""
 brew install nasm xorriso qemu
 
 echo "Done"
-echo "To use all your new GNU tools, you can add this in your .profile file: echo \"export PATH=$PATH:$HOME/opt/bin\" >> .profile`"
+echo "To use all your new GNU tools, you can add this in your .profile file: echo \"export PATH=$PATH:$INIT_PATH/bin\" >> .profile`"
 echo "Enjoy!"
